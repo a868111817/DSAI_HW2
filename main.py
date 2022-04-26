@@ -23,6 +23,9 @@ if __name__ == '__main__':
 
     # load training data
     df = pd.read_csv(args.training,names=["open", "high", "low", "close"])
+    # df_close = df['close']
+    # df_close.plot()
+    # plt.savefig('figures/close.png')
 
     # prepare training and testing data
     X_train, y_train , X_test, sc = utils.ts_train_test(df,5,1)
@@ -53,9 +56,9 @@ if __name__ == '__main__':
         else:
             tomorrow = df_test[:i+1].mean()
         today = df_test.iloc[i]
-        print('day: ',i+1)
-        print('today',today)
-        print('tomorrow',tomorrow)
+        # print('day: ',i+1)
+        # print('today',today)
+        # print('tomorrow',tomorrow)
 
         # sell
         if (today > tomorrow ):
@@ -82,6 +85,6 @@ if __name__ == '__main__':
                 stock += 1
 
     output = pd.DataFrame(action)
-    output.to_csv("output.csv",index=False,header=None)
+    output.to_csv(args.output,index=False,header=None)
 
 

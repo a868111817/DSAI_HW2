@@ -71,9 +71,9 @@ def iterator_test(all_data,sc):
     return X_test
 
 def actual_pred_plot(all_data,preds):
-    actual_pred = pd.DataFrame(columns = ['close', 'prediction'])
+    actual_pred = pd.DataFrame(columns = ['actual', 'prediction'])
     ts_train, ts_test = train_test_split(all_data,test_size=0.2, shuffle=False)
-    actual_pred['close'] = ts_test['close'][0:len(preds)]
+    actual_pred['actual'] = ts_test['close'][0:len(preds)]
     actual_pred['prediction'] = preds[:,0]
 
     actual_pred.plot()
