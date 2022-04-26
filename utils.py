@@ -52,6 +52,24 @@ def ts_train_test(all_data,time_steps,for_periods):
 
     return X_train, y_train , X_test, sc
 
+def iterator_test(all_data,sc):
+    time_steps = 5
+    for_periods = 1
+
+    inputs = pd.DataFrame(all_data).values
+    inputs = inputs[len(inputs)-len(all_data):]
+    inputs = inputs.reshape(-1,1)
+    inputs  = sc.transform(inputs)
+
+    # Preparing X_test
+    X_test = []
+    X_test.append(inputs)
+
+    X_test = np.array(X_test)
+    X_test = np.reshape(X_test, (X_test.shape[0],X_test.shape[1],1))
+
+    return X_test
+
 def actual_pred_plot(all_data,preds):
     actual_pred = pd.DataFrame(columns = ['close', 'prediction'])
     ts_train, ts_test = train_test_split(all_data,test_size=0.2, shuffle=False)
